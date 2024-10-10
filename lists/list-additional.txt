@@ -1,0 +1,11 @@
+discord.com
+discord.gg
+discordapp.com
+discordapp.net
+discord.media
+
+youtube.com
+googleapis.com
+googlevideo.com
+ggpht.com
+ytimg.com
