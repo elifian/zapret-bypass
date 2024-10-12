@@ -5,3 +5,4 @@ start "zapret" /min "%~dp0bin\zapret.exe" ^
 --filter-tcp=80 --dpi-desync=fake,split2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --new ^
 --filter-tcp=443 --hostlist="%~dp0lists\list.txt" --hostlist="%~dp0lists\list-additional.txt" --dpi-desync=fake,split2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --dpi-desync-fake-tls="%~dp0fake\tls.bin" --new ^
 --dpi-desync=fake,disorder2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig
+exit
