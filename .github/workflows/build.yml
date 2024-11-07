@@ -1,0 +1,43 @@
+name: Create Release on Commit
+
+on:
+  push:
+    branches:
+      - main  # Замените "main" на нужную ветку, если необходимо
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
+      - name: Create zip file
+        run: zip -r zapret.zip ./*
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: latest  # Используется тег "latest" для обновления при каждом коммите
+          release_name: "${{ env.commit_message }}"  # Название релиза из сообщения коммита
+          draft: false
+          prerelease: false
+
+      - name: Upload ZIP to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./zapret.zip
+          asset_name: zapret.zip
+          asset_content_type: application/zip
