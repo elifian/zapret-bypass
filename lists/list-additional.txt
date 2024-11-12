@@ -19,3 +19,5 @@ discord.media
 discordcdn.com
 discordstatus.com
 googleapis.com
+
+cloudflare-ech.com
