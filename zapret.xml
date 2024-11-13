@@ -3,11 +3,11 @@
   <name>zapret DPI Bypass</name>
   <description>zapret DPI bypass software</description>
   <executable>bin\winws.exe</executable>
-  <arguments>--wf-tcp=80,443 --wf-udp=443,50000-50100 ^
---filter-udp=443 --hostlist="lists\list.txt" --hostlist="lists\list-additional.txt" --hostlist-auto="lists\autohostlist.txt" --hostlist-auto-fail-time=3 --hostlist-auto-fail-threshold=1 --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="fake\quic_telegram.bin" --new ^
+  <arguments>--filter-udp=443 --hostlist="lists\list.txt" --hostlist="lists\list-additional.txt" --hostlist-auto="lists\autohostlist.txt" --hostlist-auto-fail-time=3 --hostlist-auto-fail-threshold=1 --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="fake\quic_telegram.bin" --new ^
 --filter-udp=50000-50100 --dpi-desync=fake,disorder2 --dpi-desync-any-protocol --dpi-desync-cutoff=d3 --dpi-desync-repeats=6 --new ^
 --filter-tcp=80 --hostlist="lists\list.txt" --hostlist="lists\list-additional.txt" --hostlist-auto="lists\autohostlist.txt" --hostlist-auto-fail-time=3 --hostlist-auto-fail-threshold=1 --dpi-desync=fake,disorder2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --new ^
---filter-tcp=443 --hostlist="lists\list.txt" --hostlist="lists\list-additional.txt" --hostlist-auto="lists\autohostlist.txt" --hostlist-auto-fail-time=3 --hostlist-auto-fail-threshold=1 --dpi-desync=fake,disorder2 --dpi-desync-autottl=2 --dpi-desync-repeats=6 --dpi-desync-fooling=badseq --dpi-desync-fake-tls="fake\tls_telegram.bin"</arguments>
+--filter-tcp=443 --hostlist="lists\list.txt" --hostlist="lists\list-additional.txt" --hostlist="lists\list-discord.txt" --hostlist-auto="lists\autohostlist.txt" --hostlist-auto-fail-time=3 --hostlist-auto-fail-threshold=1 --dpi-desync=fake,disorder2 --dpi-desync-autottl=2 --dpi-desync-repeats=6 --dpi-desync-fooling=badseq --dpi-desync-fake-tls="fake\tls_telegram.bin" --new ^
+--filter-udp=443 --hostlist="lists\list-youtube.txt" --dpi-desync-cutoff=n2 --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="fake\quic_telegram.bin"</arguments>
   <log mode="none"/>
   <onfailure action="restart" />
   <priority>RealTime</priority>
