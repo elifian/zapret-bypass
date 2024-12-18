@@ -21,5 +21,3 @@ googleapis.com
 googlevideo.com
 
 cloudflare-ech.com
-
-steampowered.com
