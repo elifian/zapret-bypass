@@ -7,6 +7,19 @@ discordcdn.com
 discordstatus.com
 googleapis.com
 
+ggpht.com
+ytimg.com
+youtube.com
+www.youtube.com
+yt.be
+youtu.be
+youtube-nocookie.com
+googleadservices.com
+gvt1.com
+google.com
+googleapis.com
+googlevideo.com
+
 cloudflare-ech.com
 
 steampowered.com
