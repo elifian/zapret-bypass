@@ -22,7 +22,7 @@ sc start zapret
 
 sc query zapret | findstr "PENDING RUNNING" > NUL
 if %errorlevel% == 0 (
-    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret запущен', 'OKOnly,Information', 'Zapret')"
+    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is running', 'OKOnly,Information', 'Zapret')"
 ) else (
-    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Служба не установлена!', '16', 'Zapret')"
+    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is not running!', '16', 'Zapret')"
 )
