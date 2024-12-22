@@ -8,4 +8,5 @@
 - **`service_♾️.bat`** - альтернативный вариант
 - **`service_remove.bat`** - удалить из автозапуска (в службах) и остановить
 ### Оригинальные репозитории
-Zapret https://github.com/bol-van/zapret  
+Zapret https://github.com/bol-van/zapre
+Winsw https://github.com/winsw/winsw

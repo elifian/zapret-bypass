@@ -1,0 +1,19 @@
+<service>
+  <id>zapret</id>
+  <name>zapret DPI Bypass</name>
+  <description>zapret DPI bypass software</description>
+  <executable>bin\winws.exe</executable>
+  <arguments></arguments>
+  <log mode="none"/>
+  <onfailure action="restart" />
+  <priority>RealTime</priority>
+  <stoptimeout>1 sec</stoptimeout>
+</service>
+
+
+
+
+
+
+
+
