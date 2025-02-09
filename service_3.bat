@@ -25,10 +25,24 @@ sc start zapret >nul
 
 for /f "tokens=3" %%i in ('sc query zapret ^| findstr /i "RUNNING START_PENDING"') do set SERVICE_STATUS=%%i
 
-if /i "%SERVICE_STATUS%"=="2" goto RunZapret
-if /i "%SERVICE_STATUS%"=="4" goto RunZapret
-powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is not running!', '16', 'Zapret')"
-exit /b
+if /i not "%SERVICE_STATUS%"=="2" if /i not "%SERVICE_STATUS%"=="4" (
+    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is not running!', '16', 'Zapret')"
+    exit /b
+)
 
-:RunZapret
-powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is running', 'OKOnly,Information', 'Zapret')"
+set SITE_STATUS=0
+for %%A in ("https://youtube.com" "https://discord.com") do (
+    curl -I --max-time 1 %%A >nul 2>&1
+    if %errorlevel%==0 set SITE_STATUS=1
+)
+
+if %SITE_STATUS%==0 (
+    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is running, but Discord/YouTube domains are not responding, please try other options (service1-3).', '16', 'Zapret')"
+    sc stop zapret >nul
+    sc stop windivert >nul
+    sc delete zapret >nul
+    exit /b
+)
+
+powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is running!', 'OKOnly,Information', 'Zapret')"
+exit /b
