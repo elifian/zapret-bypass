@@ -8,6 +8,11 @@ if '%errorlevel%' NEQ '0' (
     exit /b
 )
 
+tasklist /FI "IMAGENAME eq winws.exe" 2>NUL | find /I "winws.exe" >NUL
+if "%ERRORLEVEL%"=="0" (
+    powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Before starting, turn off the zapret service!', '16', 'Zapret')"
+)
+
 cd /d "%~dp0"
 
 set BIN=%~dp0bin\

@@ -1,4 +1,12 @@
 @echo off
+echo Please, wait...
+
+set lockfile=%TEMP%\batchlock.txt
+if exist "%lockfile%" (
+    exit /b
+) else (
+    echo 1 > "%lockfile%"
+)
 
 reg query "HKU\S-1-5-19\Environment" >nul 2>&1
 if "%Errorlevel%" NEQ "0" (
@@ -17,7 +25,7 @@ if %errorlevel%==0 (
     sc stop zapret >nul
     sc stop windivert >nul
     sc delete zapret >nul
-    timeout /t 2 >nul
+    powershell -Command "Start-Sleep -Milliseconds 1100" 
 )
 
 "%~dp0zapret.exe" install >nul
@@ -28,7 +36,8 @@ for /f "tokens=3" %%i in ('sc query zapret ^| findstr /i "RUNNING START_PENDING"
 if /i "%SERVICE_STATUS%"=="2" goto RunZapret
 if /i "%SERVICE_STATUS%"=="4" goto RunZapret
 powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is not running!', '16', 'Zapret')"
-exit /b
+del "%lockfile%"
 
 :RunZapret
 powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Zapret is running', 'OKOnly,Information', 'Zapret')"
+del "%lockfile%"
