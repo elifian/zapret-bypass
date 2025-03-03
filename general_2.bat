@@ -2,12 +2,6 @@
 chcp 65001 >nul
 :: 65001 - UTF-8
 
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-if '%errorlevel%' NEQ '0' (
-    powershell -Command "Start-Process '%~f0' -Verb RunAs"
-    exit /b
-)
-
 tasklist /FI "IMAGENAME eq winws.exe" 2>NUL | find /I "winws.exe" >NUL
 if "%ERRORLEVEL%"=="0" (
     powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Before starting, turn off the zapret service!', '16', 'Zapret')"
