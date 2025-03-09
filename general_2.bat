@@ -2,6 +2,13 @@
 chcp 65001 >nul
 :: 65001 - UTF-8
 
+reg query "HKU\S-1-5-19\Environment" >nul 2>&1
+if "%Errorlevel%" NEQ "0" (
+    PowerShell.exe -WindowStyle Hidden -NoProfile -NoLogo -Command ^
+    "Start-Process -Verb RunAs -FilePath '%~f0' -ArgumentList '%*'" 
+    exit /b
+)
+
 tasklist /FI "IMAGENAME eq winws.exe" 2>NUL | find /I "winws.exe" >NUL
 if "%ERRORLEVEL%"=="0" (
     powershell -Command "Add-Type -AssemblyName 'Microsoft.VisualBasic'; [Microsoft.VisualBasic.Interaction]::MsgBox('Before starting, turn off the zapret service!', '16', 'Zapret')"
