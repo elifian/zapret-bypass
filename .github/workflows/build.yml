@@ -16,11 +16,15 @@ jobs:
       - name: Get commit message
         id: get_commit_message
         run: |
+          # Get the full commit message
           commit_message=$(git log -1 --pretty=%B)
-          sanitized_tag_name=$(echo "$commit_message" | tr -cd '[:alnum:].-_')
-          echo "commit_message=$commit_message" >> $GITHUB_ENV
-          echo "tag_name=$sanitized_tag_name" >> $GITHUB_ENV
-      
+          # Extract the first line for tag and release name
+          tag_name=$(echo "$commit_message" | head -n 1 | tr -cd '[:alnum:].-_')
+          # Extract all lines after the first for description (if any)
+          description=$(echo "$commit_message" | tail -n +2 | sed '/^$/d')
+          echo "tag_name=$tag_name" >> $GITHUB_ENV
+          echo "description=$description" >> $GITHUB_ENV
+
       - name: Remove README.md
         run: rm -f README.md
 
@@ -34,7 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: "${{ env.tag_name }}"
-          release_name: "${{ env.commit_message }}"
+          release_name: "${{ env.tag_name }}"
+          body: "${{ env.description }}"
           draft: false
           prerelease: false
 
