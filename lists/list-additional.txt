@@ -20,4 +20,10 @@ google.com
 googleapis.com
 googlevideo.com
 
+cloudflare-dns.com
 cloudflare-ech.com
+cloudflare-esni.com
+cloudflare-gateway.com
+cloudflare-quic.com
+cloudflare.com
+one.one.one.one
