@@ -1,0 +1,5 @@
+amazonaws.com
+amazonaws.com.cn
+epicgames.dev
+epicgames.com
+valve.net
