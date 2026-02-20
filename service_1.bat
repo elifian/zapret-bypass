@@ -21,7 +21,7 @@ if "%Errorlevel%" NEQ "0" (
 set "zapret=%~dp0zapret.xml"
 set "general=%~dp0general_1.bat"
 
-powershell -Command "$lines=Get-Content '%general%'; $commandLines=@(); $collecting=$false; foreach($line in $lines){if($line -match '^start\s+\""zapret\""'){$collecting=$true};if($collecting){$commandLines+=$line -replace '\s*\^$',''};if($collecting -and -not ($line -match '\s*\^$')){break}};$command=$commandLines -join ' '; $Arguments=''; if($command -match '\""%%~dp0bin\\winws\.exe\""(\s+(.+))?'){$Arguments=$matches[2];if($Arguments){$Arguments=$Arguments -replace '\""%%~dp0([^\""]+)\""','$1'}}; [xml]$xml=Get-Content '%zapret%'; $xml.service.arguments=$Arguments.Trim(); $xml.Save('%zapret%')"
+powershell -Command "$lines=Get-Content '%general%'; $commandLines=@(); $collecting=$false; foreach($line in $lines){if($line -match '^start\s+\""zapret\""'){$collecting=$true}; if($collecting){if($line -match '^\s*$'){continue}; $cleanLine=$line -replace '\s*\^\s*$',''; $commandLines+=$cleanLine; if($line -notmatch '\^\s*$'){break}}}; $command=$commandLines -join ' '; $Arguments=''; if($command -match '\""%%~dp0bin\\winws\.exe\""(\s+(.+))?'){$Arguments=$matches[2];if($Arguments){$Arguments=$Arguments -replace '\""%%~dp0([^\""]+)\""','$1'}}; [xml]$xml=Get-Content '%zapret%'; $xml.service.arguments=$Arguments.Trim(); $xml.Save('%zapret%')"
 
 sc query zapret >nul 2>&1
 if %errorlevel%==0 (
