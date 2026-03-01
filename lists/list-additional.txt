@@ -27,3 +27,13 @@ cloudflare-gateway.com
 cloudflare-quic.com
 cloudflare.com
 one.one.one.one
+
+amazonaws.com
+amazonaws.com.cn
+epicgames.dev
+epicgames.com
+
+steampowered.com
+steamcommunity.com
+steamusercontent.com
+steam-chat.com
